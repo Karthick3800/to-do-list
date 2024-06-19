@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function getlocalitems()
 {
   let list=localStorage.getItem('Todo');
-  console.log(list);
+  // console.log(list);
   if(list)
     return JSON.parse(localStorage.getItem('Todo'));
   else
