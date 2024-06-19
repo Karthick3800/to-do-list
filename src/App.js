@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const initialItems = [
-  
-];
+// to get local item from local storage
+function getlocalitems()
+{
+  let list=localStorage.getItem('Todo');
+  console.log(list);
+  if(list)
+    return JSON.parse(localStorage.getItem('Todo'));
+  else
+  {
+    return [];
+  }
+}
+// const initialItems = getlocalitems();
 
 export default function App()
 {
-const [items,setItems]=useState(initialItems);
+const [items,setItems]=useState(getlocalitems());
 
 function AddItems(item){
 setItems((items)=>[...items,item]);
@@ -26,6 +36,7 @@ function handleReset()
   const confirm=window.confirm("Are you sure you want to clear all Todo ?")
   if(confirm)setItems([]);
 }
+useEffect(()=>{localStorage.setItem('Todo',JSON.stringify(items))},[items]);
 return (
   <div className="app">
     <Logo/>
